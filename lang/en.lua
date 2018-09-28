@@ -265,37 +265,15 @@ ZO_CreateStringId("TTC_ERROR_PRICETABLEOUTDATED", "Price table outdated. Please 
 ZO_CreateStringId("TTC_ERROR_ItemLookUpTableMissing", "Item lookup table is missing. \nYou need to run Client.exe under Documents/Elder Scrolls Online/live/AddOns/TamrielTradeCentre/Client before starting the game to make TTC work properly.")
 ZO_CreateStringId("TTC_ERROR_UNABLETODETECTSERVERREGION", "Unable to detect server region")
 
---Price
-ZO_CreateStringId("TTC_PRICE_PRICETOCHAT",                  "Price to Chat")
-
---> BAERTRAM
---Languages & chat output
---> These entries need to be localized for all languages (ESO supported and non-ESO supported ones)!
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES",             "Chat languages")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_CLIENT",      ">Use client language")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_RU",          "Russian")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_ZH",          "Chinese")
---> These entries don't need to be localized for ESO supported languages as they should be localized by the base game already.
---  Attention: They need to be localized for non-ESO supported languages like Russian, Chinese, Spanish, Portuguese, and others as well!
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_DE",          GetString(SI_INPUT_LANGUAGE_GERMAN))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_EN",          GetString(SI_INPUT_LANGUAGE_ENGLISH))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_FR",          GetString(SI_INPUT_LANGUAGE_FRENCH))
----
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_SAY",          GetString(SI_CHANNEL_SWITCH_SAY))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_YELL",         GetString(SI_CHANNEL_SWITCH_YELL))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE",         GetString(SI_CHANNEL_SWITCH_ZONE))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE1",        GetString(SI_CHANNEL_SWITCH_ZONE_ENGLISH))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE2",        GetString(SI_CHANNEL_SWITCH_ZONE_GERMAN))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE3",        GetString(SI_CHANNEL_SWITCH_ZONE_FRENCH))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE4",        GetString(SI_CHANNEL_SWITCH_ZONE_JAPANESE))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD1",       GetString(SI_CHANNEL_SWITCH_GUILD_1))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD2",       GetString(SI_CHANNEL_SWITCH_GUILD_2))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD3",       GetString(SI_CHANNEL_SWITCH_GUILD_3))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD4",       GetString(SI_CHANNEL_SWITCH_GUILD_4))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD5",       GetString(SI_CHANNEL_SWITCH_GUILD_5))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_WHISPER_SENT", GetString(SI_CHANNEL_SWITCH_WHISPER))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_PARTY",        GetString(SI_CHANNEL_SWITCH_PARTY))
-
---Load the english texts for the price to chat
-TamrielTradeCentre.PriceToChatLanguage(TTC_LANG_EN_INDEX)
---< BAERTRAM
+--Pricing
+ZO_CreateStringId("TTC_PRICE_UPDATEDTODAY", "Updated Today")
+ZO_CreateStringId("TTC_PRICE_LASTUPDATEDXDAYSAGO", "Last updated %i days ago")
+ZO_CreateStringId("TTC_PRICE_NOLISTINGDATA", "No listing data")
+ZO_CreateStringId("TTC_PRICE_SUGGESTEDXTOY", "Suggested : %s ~ %s")
+ZO_CreateStringId("TTC_PRICE_AGGREGATEPRICESXYZ", "[Avg %s/Min %s/Max %s]")
+ZO_CreateStringId("TTC_PRICE_XLISTINGSYITEMS", "(%s listings/%s items)")
+ZO_CreateStringId("TTC_PRICE_XLISTINGS", "(%s listings)")
+ZO_CreateStringId("TTC_PRICE_FORXNOLISTINGDATA", "TTC Price for %s: No listing data. ")
+ZO_CreateStringId("TTC_PRICE_FORX", "TTC Price for %s : ")
+ZO_CreateStringId("TTC_PRICE_NOTENOUGHDATAFORSUGGESTION", "Not enough data for suggestion")
+ZO_CreateStringId("TTC_PRICE_PRICETOCHAT", "Price to Chat")

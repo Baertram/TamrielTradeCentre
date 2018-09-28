@@ -238,6 +238,16 @@ ZO_CreateStringId("TTC_MSG_THANKSFORUSINGTTC", "Merci pour l'utilisation de Tamr
 ZO_CreateStringId("TTC_MSG_FIRSTLOADINFO", "-Veuillez notez que cet addon |c993300requiert le programme Client associé|r pour fonctionner.\n-Le Client chargera vos listes de résultats et conservera à jour l'addon et les prix.\n-À la première utilisation seulement, |c339999SVP ouvrez une boutique de guilde et attendez que l'addon analyse les offres existantes.|r\n-Pour plus d'information, visitez http://tamrieltradecentre.com/help/AddonAndClient")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEMISSING", "Table de prix manquante")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEOUTDATED", "Table de prix obsolète, veuillez effectuer une mise à jour en exécutant Client.exe")
+ZO_CreateStringId("TTC_PRICE_UPDATEDTODAY", "Mis à jour aujourd'hui")
+ZO_CreateStringId("TTC_PRICE_LASTUPDATEDXDAYSAGO", "Dernière mise à jour il y a %i jours")
+ZO_CreateStringId("TTC_PRICE_NOLISTINGDATA", "Aucune donnée de liste")
+ZO_CreateStringId("TTC_PRICE_SUGGESTEDXTOY", "Prix proposé : %s ~ %s")
+ZO_CreateStringId("TTC_PRICE_AGGREGATEPRICESXYZ", "[Moy %s/Min %s/Max %s]")
+ZO_CreateStringId("TTC_PRICE_XLISTINGSYITEMS", "(%s offres/%s items)")
+ZO_CreateStringId("TTC_PRICE_XLISTINGS", "(%s offres)")
+ZO_CreateStringId("TTC_PRICE_FORXNOLISTINGDATA", "TTC Prix pour %s : Aucune donnée disponible")
+ZO_CreateStringId("TTC_PRICE_FORX", "TTC Prix pour %s : ")
+ZO_CreateStringId("TTC_PRICE_NOTENOUGHDATAFORSUGGESTION", "Données insuffisantes pour suggestion de prix")
 ZO_CreateStringId("TTC_PRICE_PRICETOCHAT", "Prix vers la fenêtre Dialogue")
 ZO_CreateStringId("TTC_ERROR_ItemLookUpTableMissing", "La table de consultation des objets est manquante. \nVous devez exécuter Client.exe  dans Mes Documents/Elder Scrolls Online/live/AddOns/TamrielTradeCentre/Client avant de commencer le jeu pour que TTC fonctionne correctement.")
 ZO_CreateStringId("TTC_NPC_SHARGALASH", "shargalash")
@@ -253,14 +263,3 @@ ZO_CreateStringId("TTC_NPC_RUBYNDENILE", "rubyn denile")
 ZO_CreateStringId("TTC_NPC_TALWULLAURE", "talwullaurë")
 ZO_CreateStringId("TTC_NPC_YGGURZSTRONGBOW", "yggurz fortarc")
 ZO_CreateStringId("TTC_NPC_UTZAEI", "utzaei")
-
---> BAERTRAM
---Languages & chat output
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES",         "Langues de dialogue")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_CLIENT",  ">Utiliser la langue du client")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_RU",      "Russe")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_ZH",      "Chinois")
-
---Load the french texts for the price to chat
-TamrielTradeCentre.PriceToChatLanguage(TTC_LANG_FR_INDEX)
---< BAERTRAM
