@@ -151,6 +151,30 @@ function TamrielTradeCentrePrice:AppendPriceInfo(toolTipControl, itemLink)
 end
 
 function TamrielTradeCentrePrice:PriceInfoToChat(itemLink)
+	-->BAERTRAM
+	local chatChannel
+	local changeLanguageBecauseOfChatChannel = false
+	--Get the currently used chat channel at the active chat tab
+	if CHAT_SYSTEM and CHAT_SYSTEM.currentChannel then chatChannel = CHAT_SYSTEM.currentChannel end
+	--Check if the chat channel is given and supported
+	if chatChannel ~= nil then
+		local supportedChatChannels = TamrielTradeCentre.supportedChatChannels
+		--Is the current chat channel suppported?
+		local isChatChannelSupported = supportedChatChannels[chatChannel] or false
+		if isChatChannelSupported then
+			--Get the wished chat language for the channel
+			local wishedChatChannelLang = _settings.chatLanguage[chatChannel]
+			--Is the current client language <> the wished chat output language for the currently active chat channel?
+			changeLanguageBecauseOfChatChannel = wishedChatChannelLang ~= nil and wishedChatChannelLang ~= TTC_LANG_CLIENT_INDEX
+			if changeLanguageBecauseOfChatChannel then
+				--Change the needed localization variables to the wished chat channel output language
+				-->Function is defined in files /lang/common.lua
+				TamrielTradeCentre.PriceToChatLanguage(wishedChatChannelLang)
+			end
+		end
+	end
+	--<BAERTRAM
+
 	local priceInfo = self:GetPriceInfo(itemLink)
 	local priceString = string.format(GetString(TTC_PRICE_FORX), itemLink)
 	if (priceInfo == nil) then
@@ -184,6 +208,13 @@ function TamrielTradeCentrePrice:PriceInfoToChat(itemLink)
 	end
 
 	CHAT_SYSTEM.textEntry.editControl:InsertText(priceString)
+
+	--Change the price to chat texts back to the original language of your client so the tooltips look fine for you again
+	if changeLanguageBecauseOfChatChannel then
+		--Change the ölanguage back to the client's language now
+		-->Function is defined in files /lang/common.lua
+		TamrielTradeCentre.PriceToChatLanguage(TTC_LANG_CLIENT_INDEX)
+	end
 end
 
 local function OverWriteLinkMouseUpHandler()

@@ -198,6 +198,7 @@ ZO_CreateStringId("TTC_SETTING_ENABLEITEMSOLDNOTIFICATION", "Aktiviere Verkaufsb
 ZO_CreateStringId("TTC_SETTING_ENABLEITEMSOLDNOTIFICATION_TOOLTIP", "Text-Benachrichtigung im Chat-Panel")
 ZO_CreateStringId("TTC_SETTING_ENABLEAUTORECORDSEARCHRESULTS", "Aktiviere automatisches Speichern von Suchergebnissen")
 ZO_CreateStringId("TTC_SETTING_ENABLEAUTORECORDSEARCHRESULTS_TOOLTIP", "Automatische Speicherung von gesuchten Gegenständen für Upload")
+ZO_CreateStringId("TTC_SETTING_ENABLEMYGUILDLISTINGSUPLOAD", "Synchr. meine Gildenladen Verkäufe")
 ZO_CreateStringId("TTC_SETTING_ENABLEGENERALNOTIFICATIONS", "Aktiviere allgemeine Benachrichtigungen")
 ZO_CreateStringId("TTC_SETTING_MAXNUMBEROFAUTORECORDEDENTRIES", "Maximale Anzahl der gespeicherten Einträge")
 ZO_CreateStringId("TTC_SETTING_TOOLTIPSETTINGS", "Tooltip-Einstellungen")
@@ -238,16 +239,6 @@ ZO_CreateStringId("TTC_MSG_THANKSFORUSINGTTC", "Danke für die Nutzung des Tamri
 ZO_CreateStringId("TTC_MSG_FIRSTLOADINFO", "-Beachtet, dass das Addon |c993300 den dazugehörigen Desktop Client|r benötigt, um zu funktionieren.\n-Der Desktop Client wird die Handelslisten und das Addon/ die Preisinformation aktuell halten\n-Wenn ihr das Addon zum ersten Mal nutzt, |c339999öffnet bitte den Gildenladen und wartet, bis das Addon die existierenden Gildeneinträge gescannt hat. |r\n- Für mehr Informationen: http://tamrieltradecentre.com/help/AddonAndClient")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEMISSING", "Preistabelle fehlt")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEOUTDATED", "Preistabelle veraltet. Bitte startet Client.exe erneut, um die Tabelle zu aktualisieren")
-ZO_CreateStringId("TTC_PRICE_UPDATEDTODAY", "Heute aktualisiert")
-ZO_CreateStringId("TTC_PRICE_LASTUPDATEDXDAYSAGO", "Zuletzt aktualisiert vor %i Tagen")
-ZO_CreateStringId("TTC_PRICE_NOLISTINGDATA", "Keine Einträge")
-ZO_CreateStringId("TTC_PRICE_SUGGESTEDXTOY", "Vorschlag: %s ~ %s")
-ZO_CreateStringId("TTC_PRICE_AGGREGATEPRICESXYZ", "[Ø %s/min. %s/max. %s]")
-ZO_CreateStringId("TTC_PRICE_XLISTINGSYITEMS", "(%s Einträge/%s Gegenstände)")
-ZO_CreateStringId("TTC_PRICE_XLISTINGS", "(%s Einträge)")
-ZO_CreateStringId("TTC_PRICE_FORXNOLISTINGDATA", "TTC: Preis für %s: Keine Daten vorhanden. ")
-ZO_CreateStringId("TTC_PRICE_FORX", "TTC: Preis für %s : ")
-ZO_CreateStringId("TTC_PRICE_NOTENOUGHDATAFORSUGGESTION", "Preisvorschlag nicht möglich; zu wenige Informationen.")
 ZO_CreateStringId("TTC_PRICE_PRICETOCHAT", "TTC-Preis in Chat einfügen")
 ZO_CreateStringId("TTC_ERROR_ItemLookUpTableMissing", "Objektkatalog fehlt.\n Damit TTC ordnungsgemäß funktioniert, muss Client.exe unter Dokumente/Elder Scrolls Online/live/Addons/TamrielTradeCentre/Client gestartet werden.")
 ZO_CreateStringId("TTC_NPC_SHARGALASH", "shargalash")
@@ -263,3 +254,14 @@ ZO_CreateStringId("TTC_NPC_RUBYNDENILE", "rubyn denile")
 ZO_CreateStringId("TTC_NPC_TALWULLAURE", "talwullaure")
 ZO_CreateStringId("TTC_NPC_YGGURZSTRONGBOW", "yggurz starkbogen")
 ZO_CreateStringId("TTC_NPC_UTZAEI", "utzaei")
+
+--> BAERTRAM
+--Languages & chat output
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES",         "Chat Sprachen")
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_CLIENT",  ">Nutze Client Sprache")
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_RU",      "Russisch")
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_ZH",      "Chinesisch")
+
+--Load the german texts for the price to chat
+TamrielTradeCentre.PriceToChatLanguage(TTC_LANG_DE_INDEX)
+--< BAERTRAM

@@ -244,15 +244,34 @@ ZO_CreateStringId("TTC_ERROR_PRICETABLEMISSING", "价格表不存在")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEOUTDATED", "价格表版本过低, 请运行TTC客户端来更新价格表")
 ZO_CreateStringId("TTC_ERROR_ItemLookUpTableMissing", "道具查询表不存在. \n你需要在运行游戏前启动TTC客户端 (我的文档/Elder Scrolls Online/live/AddOns/TamrielTradeCentre/Client/Client.exe) 否则TTC将无法正常工作")
 
---Pricing
-ZO_CreateStringId("TTC_PRICE_UPDATEDTODAY", "最新")
-ZO_CreateStringId("TTC_PRICE_LASTUPDATEDXDAYSAGO", "%i天前更新")
-ZO_CreateStringId("TTC_PRICE_NOLISTINGDATA", "没有在售信息")
-ZO_CreateStringId("TTC_PRICE_SUGGESTEDXTOY", "推荐价格 : %s ~ %s")
-ZO_CreateStringId("TTC_PRICE_AGGREGATEPRICESXYZ", "[平均 %s/最低 %s/最高 %s]")
-ZO_CreateStringId("TTC_PRICE_XLISTINGSYITEMS", "(%s 条在售/共%s 件)")
-ZO_CreateStringId("TTC_PRICE_XLISTINGS", "(%s 条在售)")
-ZO_CreateStringId("TTC_PRICE_FORXNOLISTINGDATA", "TTC 对%s报价: 没有在售信息")
-ZO_CreateStringId("TTC_PRICE_FORX", "TTC 对%s报价: ")
-ZO_CreateStringId("TTC_PRICE_NOTENOUGHDATAFORSUGGESTION", "推荐价格所需数据不足")
 ZO_CreateStringId("TTC_PRICE_PRICETOCHAT", "分享价格")
+
+--> BAERTRAM
+--Languages & chat output
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES", "聊天語言")
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_CLIENT", ">使用客戶語言")
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_RU", "俄語")
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_ZH", "中文")
+---To be localized if NO Chinese language patch is used (which translates the SI_* constants to Chinese texts as well!)
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_DE", "德語")
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_EN", "英語")
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_FR", "法國")
+---
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_SAY",          GetString(SI_CHANNEL_SWITCH_SAY))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_YELL",         GetString(SI_CHANNEL_SWITCH_YELL))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE",         GetString(SI_CHANNEL_SWITCH_ZONE))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE1",        GetString(SI_CHANNEL_SWITCH_ZONE_ENGLISH))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE2",        GetString(SI_CHANNEL_SWITCH_ZONE_GERMAN))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE3",        GetString(SI_CHANNEL_SWITCH_ZONE_FRENCH))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE4",        GetString(SI_CHANNEL_SWITCH_ZONE_JAPANESE))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD1",       GetString(SI_CHANNEL_SWITCH_GUILD_1))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD2",       GetString(SI_CHANNEL_SWITCH_GUILD_2))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD3",       GetString(SI_CHANNEL_SWITCH_GUILD_3))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD4",       GetString(SI_CHANNEL_SWITCH_GUILD_4))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD5",       GetString(SI_CHANNEL_SWITCH_GUILD_5))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_WHISPER_SENT", GetString(SI_CHANNEL_SWITCH_WHISPER))
+ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_PARTY",        GetString(SI_CHANNEL_SWITCH_PARTY))
+
+--Load the chinese texts for the price to chat
+TamrielTradeCentre.PriceToChatLanguage(TTC_LANG_ZH_INDEX)
+--< BAERTRAM
