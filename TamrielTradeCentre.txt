@@ -1,0 +1,35 @@
+## APIVersion: 100024
+## Title: Tamriel Trade Centre
+## Description: Addon for TamrielTradeCentre.com
+## Version: 3.18.625.37197
+## Author: TamrielTradeCentre.com
+## SavedVariables: TamrielTradeCentreVars
+## OptionalDependsOn: LibStub LibAddonMenu-2.0
+
+LibStub/LibStub.lua
+LibAddonMenu-2.0/LibAddonMenu-2.0.lua
+LibAddonMenu-2.0/controls/panel.lua
+LibAddonMenu-2.0/controls/submenu.lua
+LibAddonMenu-2.0/controls/button.lua
+LibAddonMenu-2.0/controls/checkbox.lua
+LibAddonMenu-2.0/controls/colorpicker.lua
+LibAddonMenu-2.0/controls/custom.lua
+LibAddonMenu-2.0/controls/description.lua
+LibAddonMenu-2.0/controls/dropdown.lua
+LibAddonMenu-2.0/controls/editbox.lua
+LibAddonMenu-2.0/controls/header.lua
+LibAddonMenu-2.0/controls/slider.lua
+LibAddonMenu-2.0/controls/texture.lua
+LibAddonMenu-2.0/controls/iconpicker.lua
+
+lang/common.lua
+lang/en.lua
+lang/$(language).lua
+TamrielTradeCentreInit.lua
+SettingMenu.lua
+SavedVarUpgrader.lua
+PriceTable.lua
+ItemLookUpTable_$(language).lua
+TamrielTradeCentre.lua
+TamrielTradeCentrePrice.lua
+bindings.xml
