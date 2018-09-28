@@ -522,6 +522,25 @@ function TamrielTradeCentre:GenerateDefaultSavedVar()
 
 	default["Settings"].MaxAutoRecordStoreEntryCount = 20000
 
+	--> BAERTRAM
+	local supportedLanguages = TamrielTradeCentre.supportedLanguages
+	default["Settings"].chatLanguage = {
+		[CHAT_CHANNEL_SAY] 				= TTC_LANG_CLIENT_INDEX,
+		[CHAT_CHANNEL_YELL]				= TTC_LANG_CLIENT_INDEX,
+		[CHAT_CHANNEL_ZONE] 			= TTC_LANG_CLIENT_INDEX,
+		[CHAT_CHANNEL_ZONE_LANGUAGE_1] 	= TTC_LANG_EN_INDEX, 		-- English zone chat: /zoneen
+		[CHAT_CHANNEL_ZONE_LANGUAGE_2] 	= TTC_LANG_DE_INDEX, 		-- German zone chat: /zonede
+		[CHAT_CHANNEL_ZONE_LANGUAGE_3] 	= TTC_LANG_FR_INDEX, 		-- French zone chat: /zonefr
+		[CHAT_CHANNEL_ZONE_LANGUAGE_4] 	= TTC_LANG_CLIENT_INDEX, 	-- Japanese zone chat: /zonejp
+		[CHAT_CHANNEL_WHISPER_SENT] 	= TTC_LANG_CLIENT_INDEX,
+		[CHAT_CHANNEL_GUILD_1] 			= TTC_LANG_CLIENT_INDEX,
+		[CHAT_CHANNEL_GUILD_2] 			= TTC_LANG_CLIENT_INDEX,
+		[CHAT_CHANNEL_GUILD_3] 			= TTC_LANG_CLIENT_INDEX,
+		[CHAT_CHANNEL_GUILD_4] 			= TTC_LANG_CLIENT_INDEX,
+		[CHAT_CHANNEL_GUILD_5] 			= TTC_LANG_CLIENT_INDEX,
+		[CHAT_CHANNEL_PARTY] 			= TTC_LANG_CLIENT_INDEX,
+	}
+	--< BAERTRAM
 	return default
 end
 
@@ -574,6 +593,7 @@ function TamrielTradeCentre:Init()
 		self.Data = savedVars.EUData
 	end
 	self.Settings = savedVars.Settings
+	self.DefaultSettings = default
 
 	self.PlayerID = GetUnitDisplayName('player')
 	self.Guilds = {}
