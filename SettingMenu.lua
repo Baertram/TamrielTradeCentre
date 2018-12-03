@@ -1,29 +1,47 @@
-﻿function TamrielTradeCentre:InitSettingMenu()
-	local panelData = {
-		type 	= "panel",
-	--> BAERTRAM
-		name	= TamrielTradeCentre.AddonLAMName,
-		author 	= TamrielTradeCentre.AddonLAMAuthor,
-		website = TamrielTradeCentre.AddonLAMWebsite,
-		version = TamrielTradeCentre.AddonVersion,
-	}
-	--Local speed-up for savedvariables read/write
-	local TTCsettings = self.Settings
-	local TTCDefaultSettings = self.DefaultSettings["Settings"]
-	--Build the chat output languages list according to the actually supported languages
-	-- + 1st entry:client language
-	local chatChannelLanguageList 		= {}
-	local chatChannelLanguageListValues = {}
-	local supportedLanguages = TamrielTradeCentre.supportedLanguages
-	--Build tables for the shown language string and it's internal value for the savedvars
-	--Do not use ipairs here as the table index needs to be integer (it is!) and without gaps (it isn't!)
-	local cnt = 0
-	for langIdx, langText in pairs(supportedLanguages) do
-		cnt = cnt + 1
-		chatChannelLanguageList[cnt] 		= langText
-		chatChannelLanguageListValues[cnt]	= langIdx
+﻿-->BAERTRAM, 2018-12-03
+TamrielTradeCentre = TamrielTradeCentre or {}
+function TamrielTradeCentre:updatePriceToChatContextMenu()
+	--LibCustomMenu library: Create context menu and add entries to it.
+	--Show the selected languages from the LAM settings menu, stored in variable self.Settings.ItemPriceToChatLanguage[languageIndex]
+	--Clear the context menu variable
+	TamrielTradeCentre.priceToChatLangCtm = {}
+	--For each entry in the price to chat language table: Check if the setting is enabled
+	local settings = self.Settings
+	local atLeastOneChatLanguageActivated = false
+	for languageIndex, languageEnabled in pairs(settings.ItemPriceToChatLanguage) do
+		if languageEnabled then
+			table.insert(TamrielTradeCentre.priceToChatLangCtm, languageIndex)
+			atLeastOneChatLanguageActivated = true
+		end
 	end
-	--< BAERTRAM
+	--No chat language enabled in the settings?
+	if not atLeastOneChatLanguageActivated then
+		--Then enable the english language by default
+		self.Settings.ItemPriceToChatLanguage[TTC_LANG_EN_INDEX] = true
+		table.insert(TamrielTradeCentre.priceToChatLangCtm, TTC_LANG_EN_INDEX)
+	end
+	--Use this table TamrielTradeCenter.priceToChatLangCtm later on as the menu is shown and
+	--add the entries to ZO_Menu dynamically.
+	-->See file TamrielTradeCenterPrice.lua, function OverWriteInventoryShowContextMenuHandler()
+end
+--<BAERTRAM, 2018-12-03
+
+
+function TamrielTradeCentre:InitSettingMenu()
+	local panelData = {
+		type = "panel",
+		name = "Tamriel Trade Centre",
+		author = "TamrielTradeCentre.com",
+-->BAERTRAM, 2018-12-03
+		website = "https://www.TamrielTradeCentre.com",
+		version = "3.21.1226.48292",
+--<BAERTRAM, 2018-12-03
+	}
+
+-->BAERTRAM, 2018-12-03
+	TamrielTradeCentre:updatePriceToChatContextMenu()
+--<BAERTRAM, 2018-12-03
+
 	local optionsTable = {
 		{
 			type = "header", 
@@ -34,46 +52,42 @@
 			name = GetString(TTC_SETTING_ENABLEITEMSOLDNOTIFICATION), 
 			tooltip = GetString(TTC_SETTING_ENABLEITEMSOLDNOTIFICATION_TOOLTIP),
 			getFunc = function()
-						  return TTCsettings.EnableItemSoldNotification
+						  return self.Settings.EnableItemSoldNotification
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnableItemSoldNotification = value
+						  self.Settings.EnableItemSoldNotification = value
 					  end,
-			default = TTCDefaultSettings.EnableItemSoldNotification,
 		},
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_ENABLEAUTORECORDSEARCHRESULTS),
 			tooltip = GetString(TTC_SETTING_ENABLEAUTORECORDSEARCHRESULTS_TOOLTIP),
 			getFunc = function()
-						  return TTCsettings.EnableAutoRecordStoreEntries
+						  return self.Settings.EnableAutoRecordStoreEntries
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnableAutoRecordStoreEntries = value
+						  self.Settings.EnableAutoRecordStoreEntries = value
 					  end,
-			default = TTCDefaultSettings.EnableAutoRecordStoreEntries,
 		},
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_ENABLEMYGUILDLISTINGSUPLOAD),
 			getFunc = function()
-						  return TTCsettings.EnableSelfEntriesUpload
+						  return self.Settings.EnableSelfEntriesUpload
 				      end,
 		    setFunc = function(value)
-						  TTCsettings.EnableSelfEntriesUpload = value
+						  self.Settings.EnableSelfEntriesUpload = value
 					  end,
-			default = TTCDefaultSettings.EnableSelfEntriesUpload,
 		},
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_ENABLEGENERALNOTIFICATIONS),
 			getFunc = function()
-						  return TTCsettings.EnableGeneralNotifications
+						  return self.Settings.EnableGeneralNotifications
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnableGeneralNotifications = value
+						  self.Settings.EnableGeneralNotifications = value
 					  end,
-			default = TTCDefaultSettings.EnableGeneralNotifications,
 		},
 		{
 			type = "slider",
@@ -82,13 +96,12 @@
 			max = 40000,
 			step = 1000,
 			getFunc = function()
-						  return TTCsettings.MaxAutoRecordStoreEntryCount
+						  return self.Settings.MaxAutoRecordStoreEntryCount
 					  end,
 			setFunc = function(value)
-						  TTCsettings.MaxAutoRecordStoreEntryCount = value
+						  self.Settings.MaxAutoRecordStoreEntryCount = value
 					  end,
 			width = "full",
-			default = TTCDefaultSettings.MaxAutoRecordStoreEntryCount,
 		},
 		{
 			type = "header",
@@ -99,363 +112,191 @@
 			name = GetString(TTC_SETTING_ENABLEITEMPANELPRICINGINFO),
 			tooltip = GetString(TTC_SETTING_ENABLEITEMPANELPRICINGINFO_TOOLTIP),
 			getFunc = function()
-						  return TTCsettings.EnableItemToolTipPricing
+						  return self.Settings.EnableItemToolTipPricing
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnableItemToolTipPricing = value 
+						  self.Settings.EnableItemToolTipPricing = value 
 					  end,
-			default = TTCDefaultSettings.EnableItemToolTipPricing,
 		},
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_INCLUDESUGGESTEDPRICE),
 			getFunc = function()
-						  return TTCsettings.EnableToolTipSuggested
+						  return self.Settings.EnableToolTipSuggested
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnableToolTipSuggested = value
+						  self.Settings.EnableToolTipSuggested = value
 					  end,
-			default = TTCDefaultSettings.EnableToolTipSuggested,
 		},
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_INCLUDEAGGREGATE),
 			getFunc = function()
-						  return TTCsettings.EnableToolTipAggregate
+						  return self.Settings.EnableToolTipAggregate
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnableToolTipAggregate = value
+						  self.Settings.EnableToolTipAggregate = value
 					  end,
-			default = TTCDefaultSettings.EnableToolTipAggregate,
 		},
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_INCLUDEENTRYCOUNT),
 			getFunc = function()
-						  return TTCsettings.EnableToolTipStat
+						  return self.Settings.EnableToolTipStat
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnableToolTipStat = value
+						  self.Settings.EnableToolTipStat = value
 					  end,
-			default = TTCDefaultSettings.EnableToolTipStat,
 		},
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_INCLUDELASTUPDATETIME),
 			getFunc = function()
-						  return TTCsettings.EnableToolTipLastUpdate
+						  return self.Settings.EnableToolTipLastUpdate
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnableToolTipLastUpdate = value
+						  self.Settings.EnableToolTipLastUpdate = value
 					  end,
-			default = TTCDefaultSettings.EnableToolTipLastUpdate,
 		},
 		{
 			type = "header", 
 			name = GetString(TTC_SETTING_PRICETOCHATSETTINGS),
 		},
-		--> BAERTRAM
-		{
-			type = "submenu",
-			name = GetString(TTC_SETTING_CHAT_LANGUAGES),
-			tooltip = GetString(TTC_SETTING_CHAT_LANGUAGES),
-			controls = {
-				--Dropdown: Language for chat channel "say"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_SAY),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_SAY),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_SAY]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_SAY] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_SAY],
-				},
-				--Dropdown: Language for chat channel "yell"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_YELL),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_YELL),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_YELL]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_YELL] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_YELL],
-				},
-				--Dropdown: Language for chat channel "zone"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_ZONE),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_ZONE),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_ZONE]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_ZONE] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_ZONE],
-				},
-				--Dropdown: Language for chat channel "zone en"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_ZONE1),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_ZONE1),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_1]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_1] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_1],
-				},
-				--Dropdown: Language for chat channel "zone de"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_ZONE2),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_ZONE2),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_2]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_2] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_2],
-				},
-				--Dropdown: Language for chat channel "zone fr"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_ZONE3),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_ZONE3),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_3]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_3] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_3],
-				},
-				--Dropdown: Language for chat channel "zone jp"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_ZONE4),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_ZONE4),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_4]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_4] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_ZONE_LANGUAGE_4],
-				},
-				--Dropdown: Language for chat channel "guild1"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_GUILD1),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_GUILD1),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_GUILD_1]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_GUILD_1] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_GUILD_1],
-				},
-				--Dropdown: Language for chat channel "guild2"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_GUILD2),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_GUILD2),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_GUILD_2]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_GUILD_2] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_GUILD_2],
-				},
-				--Dropdown: Language for chat channel "guild3"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_GUILD3),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_GUILD3),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_GUILD_3]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_GUILD_3] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_GUILD_3],
-				},
-				--Dropdown: Language for chat channel "guild4"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_GUILD4),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_GUILD4),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_GUILD_4]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_GUILD_4] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_GUILD_4],
-				},
-				--Dropdown: Language for chat channel "guild5"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_GUILD5),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_GUILD5),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_GUILD_5]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_GUILD_5] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_GUILD_5],
-				},
-				--Dropdown: Language for chat channel "whisper sent"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_WHISPER_SENT),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_WHISPER_SENT),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_WHISPER_SENT]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_WHISPER_SENT] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_WHISPER_SENT],
-				},
-				--Dropdown: Language for chat channel "group"
-				{
-					type = "dropdown",
-					name = GetString(TTC_SETTING_CHAT_LANGUAGE_PARTY),
-					tooltip = GetString(TTC_SETTING_CHAT_LANGUAGE_PARTY),
-					choices = chatChannelLanguageList,
-					choicesValues = chatChannelLanguageListValues,
-					getFunc = function()
-						return TTCsettings.chatLanguage[CHAT_CHANNEL_PARTY]
-					end,
-					setFunc = function(value)
-						TTCsettings.chatLanguage[CHAT_CHANNEL_PARTY] = value
-					end,
-					scrollable = true,
-					sort = "name-up",
-					default = TTCDefaultSettings.chatLanguage[CHAT_CHANNEL_PARTY],
-				},
-			} -- controls submneu chat language
-		}, -- submenu chat language,
-		--< BAERTRAM
+
+-->BAERTRAM, 2018-12-03
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_ENABLEPRICETOCHATBUTTON),
 			tooltip = GetString(TTC_SETTING_ENABLEPRICETOCHATBUTTON_TOOLTIP),
 			getFunc = function()
-						  return TTCsettings.EnableItemPriceToChatBtn
-					  end,
+				return self.Settings.EnableItemPriceToChatBtn
+			end,
 			setFunc = function(value)
-						  TTCsettings.EnableItemPriceToChatBtn = value
-					  end,
-			default = TTCDefaultSettings.EnableItemPriceToChatBtn,
+				self.Settings.EnableItemPriceToChatBtn = value
+			end,
 		},
+		{
+			type = "submenu",
+			name = GetString(TTC_SETTING_PRICETOCHATSETTINGS_SUBMENU),
+			controls = {
+				{
+					type = "description",
+					text = GetString(TTC_SETTING_ENABLEPRICETOCHATDESCR),
+					--title = "My Title", -- or string id or function returning a string (optional)
+					width = "full",
+				},
+				{
+					type = "checkbox",
+					name = GetString(TTC_SETTING_ENABLEPRICETOCHATEN_TOOLTIP),
+					tooltip = GetString(TTC_SETTING_ENABLEPRICETOCHATEN_TOOLTIP),
+					getFunc = function()
+						return self.Settings.ItemPriceToChatLanguage[TTC_LANG_EN_INDEX]
+					end,
+					setFunc = function(value)
+						self.Settings.ItemPriceToChatLanguage[TTC_LANG_EN_INDEX] = value
+						TamrielTradeCentre:updatePriceToChatContextMenu()
+					end,
+					width = "half",
+					disabled = function() return not self.Settings.EnableItemPriceToChatBtn end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(TTC_SETTING_ENABLEPRICETOCHATDE_TOOLTIP),
+					tooltip = GetString(TTC_SETTING_ENABLEPRICETOCHATDE_TOOLTIP),
+					getFunc = function()
+						return self.Settings.ItemPriceToChatLanguage[TTC_LANG_DE_INDEX]
+					end,
+					setFunc = function(value)
+						self.Settings.ItemPriceToChatLanguage[TTC_LANG_DE_INDEX] = value
+						TamrielTradeCentre:updatePriceToChatContextMenu()
+					end,
+					width = "half",
+					disabled = function() return not self.Settings.EnableItemPriceToChatBtn end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(TTC_SETTING_ENABLEPRICETOCHATFR_TOOLTIP),
+					tooltip = GetString(TTC_SETTING_ENABLEPRICETOCHATFR_TOOLTIP),
+					getFunc = function()
+						return self.Settings.ItemPriceToChatLanguage[TTC_LANG_FR_INDEX]
+					end,
+					setFunc = function(value)
+						self.Settings.ItemPriceToChatLanguage[TTC_LANG_FR_INDEX] = value
+						TamrielTradeCentre:updatePriceToChatContextMenu()
+					end,
+					width = "half",
+					disabled = function() return not self.Settings.EnableItemPriceToChatBtn end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(TTC_SETTING_ENABLEPRICETOCHATRU_TOOLTIP),
+					tooltip = GetString(TTC_SETTING_ENABLEPRICETOCHATRU_TOOLTIP),
+					getFunc = function()
+						return self.Settings.ItemPriceToChatLanguage[TTC_LANG_RU_INDEX]
+					end,
+					setFunc = function(value)
+						self.Settings.ItemPriceToChatLanguage[TTC_LANG_RU_INDEX] = value
+						TamrielTradeCentre:updatePriceToChatContextMenu()
+					end,
+					width = "half",
+					disabled = function() return not self.Settings.EnableItemPriceToChatBtn end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(TTC_SETTING_ENABLEPRICETOCHATZH_TOOLTIP),
+					tooltip = GetString(TTC_SETTING_ENABLEPRICETOCHATZH_TOOLTIP),
+					getFunc = function()
+						return self.Settings.ItemPriceToChatLanguage[TTC_LANG_ZH_INDEX]
+					end,
+					setFunc = function(value)
+						self.Settings.ItemPriceToChatLanguage[TTC_LANG_ZH_INDEX] = value
+						TamrielTradeCentre:updatePriceToChatContextMenu()
+					end,
+					width = "half",
+					disabled = function() return not self.Settings.EnableItemPriceToChatBtn end,
+				},
+			}, -- controls submenu price to chat
+		}, -- submenu price to chat
+--<BAERTRAM, 2018-12-03
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_INCLUDESUGGESTEDPRICE),
 			getFunc = function()
-						  return TTCsettings.EnablePriceToChatSuggested
+						  return self.Settings.EnablePriceToChatSuggested
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnablePriceToChatSuggested = value
+						  self.Settings.EnablePriceToChatSuggested = value
 					  end,
-			default = TTCDefaultSettings.EnablePriceToChatSuggested,
 		},
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_INCLUDEAGGREGATE),
 			getFunc = function()
-						  return TTCsettings.EnablePriceToChatAggregate
+						  return self.Settings.EnablePriceToChatAggregate
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnablePriceToChatAggregate = value
+						  self.Settings.EnablePriceToChatAggregate = value
 					  end,
-			default = TTCDefaultSettings.EnablePriceToChatAggregate,
 		},
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_INCLUDEENTRYCOUNT),
 			getFunc = function()
-						  return TTCsettings.EnablePriceToChatStat
+						  return self.Settings.EnablePriceToChatStat
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnablePriceToChatStat = value
+						  self.Settings.EnablePriceToChatStat = value
 					  end,
-			default = TTCDefaultSettings.EnablePriceToChatStat,
 		},
 		{
 			type = "checkbox",
 			name = GetString(TTC_SETTING_INCLUDELASTUPDATETIME),
 			getFunc = function()
-						  return TTCsettings.EnablePriceToChatLastUpdate
+						  return self.Settings.EnablePriceToChatLastUpdate
 					  end,
 			setFunc = function(value)
-						  TTCsettings.EnablePriceToChatLastUpdate = value
+						  self.Settings.EnablePriceToChatLastUpdate = value
 					  end,
-			default = TTCDefaultSettings.EnablePriceToChatLastUpdate,
 		},
 		{
 			type = "header", 

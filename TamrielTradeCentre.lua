@@ -522,25 +522,21 @@ function TamrielTradeCentre:GenerateDefaultSavedVar()
 
 	default["Settings"].MaxAutoRecordStoreEntryCount = 20000
 
-	--> BAERTRAM
-	local supportedLanguages = TamrielTradeCentre.supportedLanguages
-	default["Settings"].chatLanguage = {
-		[CHAT_CHANNEL_SAY] 				= TTC_LANG_CLIENT_INDEX,
-		[CHAT_CHANNEL_YELL]				= TTC_LANG_CLIENT_INDEX,
-		[CHAT_CHANNEL_ZONE] 			= TTC_LANG_CLIENT_INDEX,
-		[CHAT_CHANNEL_ZONE_LANGUAGE_1] 	= TTC_LANG_EN_INDEX, 		-- English zone chat: /zoneen
-		[CHAT_CHANNEL_ZONE_LANGUAGE_2] 	= TTC_LANG_DE_INDEX, 		-- German zone chat: /zonede
-		[CHAT_CHANNEL_ZONE_LANGUAGE_3] 	= TTC_LANG_FR_INDEX, 		-- French zone chat: /zonefr
-		[CHAT_CHANNEL_ZONE_LANGUAGE_4] 	= TTC_LANG_CLIENT_INDEX, 	-- Japanese zone chat: /zonejp
-		[CHAT_CHANNEL_WHISPER_SENT] 	= TTC_LANG_CLIENT_INDEX,
-		[CHAT_CHANNEL_GUILD_1] 			= TTC_LANG_CLIENT_INDEX,
-		[CHAT_CHANNEL_GUILD_2] 			= TTC_LANG_CLIENT_INDEX,
-		[CHAT_CHANNEL_GUILD_3] 			= TTC_LANG_CLIENT_INDEX,
-		[CHAT_CHANNEL_GUILD_4] 			= TTC_LANG_CLIENT_INDEX,
-		[CHAT_CHANNEL_GUILD_5] 			= TTC_LANG_CLIENT_INDEX,
-		[CHAT_CHANNEL_PARTY] 			= TTC_LANG_CLIENT_INDEX,
-	}
-	--< BAERTRAM
+-->BAERTRAM, 2018-12-03
+	--Preset all languages with off except english
+	default["Settings"].ItemPriceToChatLanguage = {}
+	default["Settings"].ItemPriceToChatLanguage[TTC_LANG_DE_INDEX] = false
+	default["Settings"].ItemPriceToChatLanguage[TTC_LANG_EN_INDEX] = true
+	default["Settings"].ItemPriceToChatLanguage[TTC_LANG_FR_INDEX] = false
+	default["Settings"].ItemPriceToChatLanguage[TTC_LANG_RU_INDEX] = false
+	default["Settings"].ItemPriceToChatLanguage[TTC_LANG_ZH_INDEX] = false
+	--Check the client language and enable this one as well
+	local langToUseIndex = TamrielTradeCentre.ClientLanguageToTTCLanguageIndex()
+	if langToUseIndex ~= TTC_LANG_CLIENT_INDEX then
+		default["Settings"].ItemPriceToChatLanguage[langToUseIndex] = true
+	end
+--<BAERTRAM, 2018-12-03
+
 	return default
 end
 
@@ -566,7 +562,10 @@ function TamrielTradeCentre:Init()
 
 	local clientCulture = string.lower(GetCVar("language.2"))
 	if (clientCulture~= "en" and clientCulture ~= "de" and clientCulture ~= "fr" and clientCulture ~= "zh" and clientCulture ~= "ru") then
-		ShowMsgBox("Error", "Tamriel Trade Centre only supports English client at this time. We are planning on adding support for other languages soon", SI_DIALOG_ACCEPT)
+-->BAERTRAM, 2018-12-03
+		--ShowMsgBox("Error", "Tamriel Trade Centre only supports English client at this time. We are planning on adding support for other languages soon", SI_DIALOG_ACCEPT)
+		ShowMsgBox("Error", "Tamriel Trade Centre does not support your client's language \'".. clientCulture .. "\' yet!\nPlease contact us on TamrielTradeCentre.com to add support for your language.", SI_DIALOG_ACCEPT)
+--<BAERTRAM, 2018-12-03
 		return
 	end
 
@@ -593,7 +592,6 @@ function TamrielTradeCentre:Init()
 		self.Data = savedVars.EUData
 	end
 	self.Settings = savedVars.Settings
-	self.DefaultSettings = default
 
 	self.PlayerID = GetUnitDisplayName('player')
 	self.Guilds = {}

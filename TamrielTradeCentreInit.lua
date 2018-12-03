@@ -1,62 +1,12 @@
-﻿--> BAERTRAM
-if TamrielTradeCentre == nil then TamrielTradeCentre = {} end
---< BAERTRAM
+﻿-->BAERTRAM, 2018-12-03
+TamrielTradeCentre = TamrielTradeCentre or {}
+--<BAERTRAM, 2018-12-03
 TamrielTradeCentre.IsDebug = false
-TamrielTradeCentre.AddonName 		= "TamrielTradeCentre"
---> BAERTRAM
-TamrielTradeCentre.AddonVersion 	= "3.4.6429.38725"
-TamrielTradeCentre.AddonLAMName     = "Tamriel Trade Centre"
-TamrielTradeCentre.AddonLAMAuthor   = "TamrielTradeCentre.com"
-TamrielTradeCentre.AddonLAMWebsite  = "http://www.TamrielTradeCentre.com" --http://www.esoui.com/downloads/info1245-TamrielTradeCentre.html
---Language strings and internal format for the savedvars
-TamrielTradeCentre.supportedLanguages = {
-	[TTC_LANG_CLIENT_INDEX] = GetString(TTC_SETTING_CHAT_LANGUAGES_CLIENT),	--Game's chosen client language.
-	[TTC_LANG_DE_INDEX]		= GetString(TTC_SETTING_CHAT_LANGUAGES_DE),		--German
-	[TTC_LANG_EN_INDEX]		= GetString(TTC_SETTING_CHAT_LANGUAGES_EN),		--English
-	[TTC_LANG_FR_INDEX]		= GetString(TTC_SETTING_CHAT_LANGUAGES_FR),		--French
-	[TTC_LANG_RU_INDEX]		= GetString(TTC_SETTING_CHAT_LANGUAGES_RU),		--Russian
-	[TTC_LANG_ZH_INDEX]		= GetString(TTC_SETTING_CHAT_LANGUAGES_ZH),		--Chinese
-}
---The supported chat channels for the price to chat language changer functions
-TamrielTradeCentre.supportedChatChannels = {
-	[CHAT_CHANNEL_EMOTE] 			= false,
-	[CHAT_CHANNEL_GUILD_1] 			= true,
-	[CHAT_CHANNEL_GUILD_2] 			= true,
-	[CHAT_CHANNEL_GUILD_3] 			= true,
-	[CHAT_CHANNEL_GUILD_4] 			= true,
-	[CHAT_CHANNEL_GUILD_5] 			= true,
-	[CHAT_CHANNEL_MONSTER_EMOTE] 	= false,
-	[CHAT_CHANNEL_MONSTER_SAY] 		= false,
-	[CHAT_CHANNEL_MONSTER_WHISPER]  = false,
-	[CHAT_CHANNEL_MONSTER_YELL] 	= false,
-	[CHAT_CHANNEL_OFFICER_1] 		= false,
-	[CHAT_CHANNEL_OFFICER_2] 		= false,
-	[CHAT_CHANNEL_OFFICER_3] 		= false,
-	[CHAT_CHANNEL_OFFICER_4] 		= false,
-	[CHAT_CHANNEL_OFFICER_5] 		= false,
-	[CHAT_CHANNEL_PARTY] 			= true,
-	[CHAT_CHANNEL_SAY] 				= true,
-	[CHAT_CHANNEL_SYSTEM] 			= false,
-	[CHAT_CHANNEL_UNUSED_1] 		= false,
-	[CHAT_CHANNEL_USER_CHANNEL_1] 	= false,
-	[CHAT_CHANNEL_USER_CHANNEL_2] 	= false,
-	[CHAT_CHANNEL_USER_CHANNEL_3] 	= false,
-	[CHAT_CHANNEL_USER_CHANNEL_4] 	= false,
-	[CHAT_CHANNEL_USER_CHANNEL_5] 	= false,
-	[CHAT_CHANNEL_USER_CHANNEL_6] 	= false,
-	[CHAT_CHANNEL_USER_CHANNEL_7] 	= false,
-	[CHAT_CHANNEL_USER_CHANNEL_8] 	= false,
-	[CHAT_CHANNEL_USER_CHANNEL_9] 	= false,
-	[CHAT_CHANNEL_WHISPER] 			= false,
-	[CHAT_CHANNEL_WHISPER_SENT] 	= true,
-	[CHAT_CHANNEL_YELL] 			= true,
-	[CHAT_CHANNEL_ZONE] 			= true,
-	[CHAT_CHANNEL_ZONE_LANGUAGE_1] 	= true,
-	[CHAT_CHANNEL_ZONE_LANGUAGE_2] 	= true,
-	[CHAT_CHANNEL_ZONE_LANGUAGE_3] 	= true,
-	[CHAT_CHANNEL_ZONE_LANGUAGE_4] 	= true,
-}
---< BAERTRAM
+TamrielTradeCentre.AddonName = "TamrielTradeCentre"
+-->BAERTRAM, 2018-12-03
+TamrielTradeCentre.priceToChatLangCtm = {}
+--<BAERTRAM, 2018-12-03
+
 
 function TamrielTradeCentre:DebugWriteLine(msg)
 	if (self.IsDebug) then
@@ -470,6 +420,18 @@ local KioskIDNPCsTable = {
 	},
 	[87] = {
 		GetString(TTC_NPC_UTZAEI),
+	},
+	[88] = {
+		GetString(TTC_NPC_AKIOSHEEJA),
+		GetString(TTC_NPC_FAELEMAR),
+		GetString(TTC_NPC_MAHADALATBERGAMA),
+		GetString(TTC_NPC_ORDASHA),
+		GetString(TTC_NPC_THALORIL),
+		GetString(TTC_NPC_XOKOMAR),
+
+	},
+	[89] = {
+		GetString(TTC_NPC_GIRTA),
 	},
 }
 

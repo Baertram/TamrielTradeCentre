@@ -189,6 +189,13 @@ ZO_CreateStringId("TTC_NPC_RAVAMSEDAS", "ravam sedas")
 ZO_CreateStringId("TTC_NPC_SHOGARZ", "shogarz")
 ZO_CreateStringId("TTC_NPC_VALOWENDE", "valowende")
 ZO_CreateStringId("TTC_NPC_NARDHILBARYS", "nardhil barys")
+ZO_CreateStringId("TTC_NPC_AKIOSHEEJA", "aki-osheeja")
+ZO_CreateStringId("TTC_NPC_FAELEMAR", "faelemar")
+ZO_CreateStringId("TTC_NPC_MAHADALATBERGAMA", "mahadal at-bergama")
+ZO_CreateStringId("TTC_NPC_ORDASHA", "ordasha")
+ZO_CreateStringId("TTC_NPC_THALORIL", "thaloril")
+ZO_CreateStringId("TTC_NPC_XOKOMAR", "xokomar")
+ZO_CreateStringId("TTC_NPC_GIRTA", "gir-ta")
 ZO_CreateStringId("TTC_MASTER_WRIT_ALCHEMYREGEX", "Stellt e.- (.-) mit")
 ZO_CreateStringId("TTC_MASTER_WRIT_ENCHANTINGREGEX", "Stellt e.- (.-) mit")
 ZO_CreateStringId("TTC_MASTER_WRIT_PROVISIONINGREGEX", "Stellt [aeginrstw]* ?(.-) her")
@@ -196,9 +203,11 @@ ZO_CreateStringId("TTC_MASTER_WRIT_CRAFTINGREGEX", "Stellt [aeginrstw]* ?(.-) mi
 ZO_CreateStringId("TTC_SETTING_GENERALSETTINGS", "Allgemeine Einstellungen")
 ZO_CreateStringId("TTC_SETTING_ENABLEITEMSOLDNOTIFICATION", "Aktiviere Verkaufsbenachrichtigung")
 ZO_CreateStringId("TTC_SETTING_ENABLEITEMSOLDNOTIFICATION_TOOLTIP", "Text-Benachrichtigung im Chat-Panel")
+-->BAERTRAM, 2018-12-03
+ZO_CreateStringId("TTC_SETTING_ENABLEMYGUILDLISTINGSUPLOAD", "Synchr. meine Verkäufe")
+--<BAERTRAM, 2018-12-03
 ZO_CreateStringId("TTC_SETTING_ENABLEAUTORECORDSEARCHRESULTS", "Aktiviere automatisches Speichern von Suchergebnissen")
 ZO_CreateStringId("TTC_SETTING_ENABLEAUTORECORDSEARCHRESULTS_TOOLTIP", "Automatische Speicherung von gesuchten Gegenständen für Upload")
-ZO_CreateStringId("TTC_SETTING_ENABLEMYGUILDLISTINGSUPLOAD", "Synchr. meine Gildenladen Verkäufe")
 ZO_CreateStringId("TTC_SETTING_ENABLEGENERALNOTIFICATIONS", "Aktiviere allgemeine Benachrichtigungen")
 ZO_CreateStringId("TTC_SETTING_MAXNUMBEROFAUTORECORDEDENTRIES", "Maximale Anzahl der gespeicherten Einträge")
 ZO_CreateStringId("TTC_SETTING_TOOLTIPSETTINGS", "Tooltip-Einstellungen")
@@ -209,6 +218,9 @@ ZO_CreateStringId("TTC_SETTING_INCLUDEAGGREGATE", "Durchschnitt / Min. / Max. an
 ZO_CreateStringId("TTC_SETTING_INCLUDEENTRYCOUNT", "Anzahl der Einträge anzeigen")
 ZO_CreateStringId("TTC_SETTING_INCLUDELASTUPDATETIME", "Zeit seit der letzten Aktualisierung anzeigen")
 ZO_CreateStringId("TTC_SETTING_PRICETOCHATSETTINGS", "Preis-in-Chat-Einstellungen")
+-->BAERTRAM, 2018-12-03
+ZO_CreateStringId("TTC_SETTING_PRICETOCHATSETTINGS_SUBMENU", "Preis-in-Chat - Kontextmenü")
+--<BAERTRAM, 2018-12-03
 ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATBUTTON", "Aktiviere die Preis-in-Chat-Auswahl")
 ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATBUTTON_TOOLTIP", "Auswahl im Kontextmenüs von Gegenständen")
 ZO_CreateStringId("TTC_SETTING_CLEARDATA", "Daten löschen")
@@ -239,7 +251,10 @@ ZO_CreateStringId("TTC_MSG_THANKSFORUSINGTTC", "Danke für die Nutzung des Tamri
 ZO_CreateStringId("TTC_MSG_FIRSTLOADINFO", "-Beachtet, dass das Addon |c993300 den dazugehörigen Desktop Client|r benötigt, um zu funktionieren.\n-Der Desktop Client wird die Handelslisten und das Addon/ die Preisinformation aktuell halten\n-Wenn ihr das Addon zum ersten Mal nutzt, |c339999öffnet bitte den Gildenladen und wartet, bis das Addon die existierenden Gildeneinträge gescannt hat. |r\n- Für mehr Informationen: http://tamrieltradecentre.com/help/AddonAndClient")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEMISSING", "Preistabelle fehlt")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEOUTDATED", "Preistabelle veraltet. Bitte startet Client.exe erneut, um die Tabelle zu aktualisieren")
-ZO_CreateStringId("TTC_PRICE_PRICETOCHAT", "TTC-Preis in Chat einfügen")
+--Pricing
+-->BAERTRAM, 2018-12-03
+--deleted here and moved to file lang/common.lua at the appropriate language
+--<BAERTRAM, 2018-12-03
 ZO_CreateStringId("TTC_ERROR_ItemLookUpTableMissing", "Objektkatalog fehlt.\n Damit TTC ordnungsgemäß funktioniert, muss Client.exe unter Dokumente/Elder Scrolls Online/live/Addons/TamrielTradeCentre/Client gestartet werden.")
 ZO_CreateStringId("TTC_NPC_SHARGALASH", "shargalash")
 ZO_CreateStringId("TTC_NPC_QUELILMOR", "quelilmor")
@@ -255,13 +270,11 @@ ZO_CreateStringId("TTC_NPC_TALWULLAURE", "talwullaure")
 ZO_CreateStringId("TTC_NPC_YGGURZSTRONGBOW", "yggurz starkbogen")
 ZO_CreateStringId("TTC_NPC_UTZAEI", "utzaei")
 
---> BAERTRAM
---Languages & chat output
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES",         "Chat Sprachen")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_CLIENT",  ">Nutze Client Sprache")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_RU",      "Russisch")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_ZH",      "Chinesisch")
-
---Load the german texts for the price to chat
-TamrielTradeCentre.PriceToChatLanguage(TTC_LANG_DE_INDEX)
---< BAERTRAM
+-->BAERTRAM, 2018-12-03
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATDESCR", "Die folgenden Sprachen werden im Preis-in-Chat Kontextmenü angezeigt:")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATDE_TOOLTIP", "Deutsch")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATEN_TOOLTIP", "Englisch")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATFR_TOOLTIP", "Französisch")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATRU_TOOLTIP", "Russisch")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATZH_TOOLTIP", "Chinesisch")
+--<BAERTRAM, 2018-12-03

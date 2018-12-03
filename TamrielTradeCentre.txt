@@ -1,30 +1,32 @@
-## APIVersion: 100024
+## APIVersion: 100025
 ## Title: Tamriel Trade Centre
 ## Description: Addon for TamrielTradeCentre.com
-## Version: 3.19.8323.17388
+## Version: 3.21.1226.48292
+## AddOnVersion: 321122648292
 ## Author: TamrielTradeCentre.com
 ## SavedVariables: TamrielTradeCentreVars
-## OptionalDependsOn: LibStub LibAddonMenu-2.0
+## DependsOn: LibStub LibCustomMenu
+## OptionalDependsOn: LibAddonMenu-2.0 FCOItemSaver
 
-LibStub/LibStub.lua
-LibAddonMenu-2.0/LibAddonMenu-2.0.lua
-LibAddonMenu-2.0/controls/panel.lua
-LibAddonMenu-2.0/controls/submenu.lua
-LibAddonMenu-2.0/controls/button.lua
-LibAddonMenu-2.0/controls/checkbox.lua
-LibAddonMenu-2.0/controls/colorpicker.lua
-LibAddonMenu-2.0/controls/custom.lua
-LibAddonMenu-2.0/controls/description.lua
-LibAddonMenu-2.0/controls/dropdown.lua
-LibAddonMenu-2.0/controls/editbox.lua
-LibAddonMenu-2.0/controls/header.lua
-LibAddonMenu-2.0/controls/slider.lua
-LibAddonMenu-2.0/controls/texture.lua
-LibAddonMenu-2.0/controls/iconpicker.lua
+LibStub\LibStub.lua
+LibAddonMenu-2.0\LibAddonMenu-2.0.lua
+LibAddonMenu-2.0\controls\panel.lua
+LibAddonMenu-2.0\controls\submenu.lua
+LibAddonMenu-2.0\controls\button.lua
+LibAddonMenu-2.0\controls\checkbox.lua
+LibAddonMenu-2.0\controls\colorpicker.lua
+LibAddonMenu-2.0\controls\custom.lua
+LibAddonMenu-2.0\controls\description.lua
+LibAddonMenu-2.0\controls\dropdown.lua
+LibAddonMenu-2.0\controls\editbox.lua
+LibAddonMenu-2.0\controls\header.lua
+LibAddonMenu-2.0\controls\slider.lua
+LibAddonMenu-2.0\controls\texture.lua
+LibAddonMenu-2.0\controls\iconpicker.lua
+LibCustomMenu\LibCustomMenu.lua
 
-lang/common.lua
-lang/en.lua
-lang/$(language).lua
+lang\common.lua
+lang\$(language).lua
 TamrielTradeCentreInit.lua
 SettingMenu.lua
 SavedVarUpgrader.lua

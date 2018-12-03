@@ -189,6 +189,13 @@ ZO_CreateStringId("TTC_NPC_RAVAMSEDAS", "равам седас")
 ZO_CreateStringId("TTC_NPC_SHOGARZ", "шогарз")
 ZO_CreateStringId("TTC_NPC_VALOWENDE", "валовенди")
 ZO_CreateStringId("TTC_NPC_NARDHILBARYS", "нардил барис")
+ZO_CreateStringId("TTC_NPC_AKIOSHEEJA", "аки-ошиджа")
+ZO_CreateStringId("TTC_NPC_FAELEMAR", "фейлемар")
+ZO_CreateStringId("TTC_NPC_MAHADALATBERGAMA", "махадал ат-бергама")
+ZO_CreateStringId("TTC_NPC_ORDASHA", "ордаша")
+ZO_CreateStringId("TTC_NPC_THALORIL", "талорил")
+ZO_CreateStringId("TTC_NPC_XOKOMAR", "зокомар")
+ZO_CreateStringId("TTC_NPC_GIRTA", "gir-ta")
 ZO_CreateStringId("TTC_MASTER_WRIT_ALCHEMYREGEX", "Создать предмет %((.-)%) со")
 ZO_CreateStringId("TTC_MASTER_WRIT_ENCHANTINGREGEX", "Создать (.-);")
 ZO_CreateStringId("TTC_MASTER_WRIT_PROVISIONINGREGEX", "Создать предмет %((.-)%)")
@@ -208,6 +215,9 @@ ZO_CreateStringId("TTC_SETTING_INCLUDEAGGREGATE", "Мин./Средн./Макс.
 ZO_CreateStringId("TTC_SETTING_INCLUDEENTRYCOUNT", "Количество записей")
 ZO_CreateStringId("TTC_SETTING_INCLUDELASTUPDATETIME", "Время последнего обновления")
 ZO_CreateStringId("TTC_SETTING_PRICETOCHATSETTINGS", "Настройки отправки цены в чат")
+-->BAERTRAM, 2018-12-03
+ZO_CreateStringId("TTC_SETTING_PRICETOCHATSETTINGS_SUBMENU", "Price to chat - Context menu")
+--<BAERTRAM, 2018-12-03
 ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATBUTTON", "Кнопка \"Цену в чат\"")
 ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATBUTTON_TOOLTIP", "Кнопка во всплывающем меню при щелчке правой кнопкой мыши на предмете")
 ZO_CreateStringId("TTC_SETTING_CLEARDATA", "Очистить данные")
@@ -238,7 +248,10 @@ ZO_CreateStringId("TTC_MSG_THANKSFORUSINGTTC", "Спасибо за исполь
 ZO_CreateStringId("TTC_MSG_FIRSTLOADINFO", "-Примите во внимание, что этой модификации для работы |c993300требуется соответствующее приложение.|r \n-Приложение будет выгружать ваши списки товаров, а также поддерживать информацию о ценах в актуальном состоянии\n-При первом запуске, |c339999откройте гильдейский магазин и дождитесь, пока модификация просканирует списки товаров|r\n-Более подробную информацию вы сможете найти на http://tamrieltradecentre.com/help/AddonAndClient")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEMISSING", "Отсутствует таблица с ценами")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEOUTDATED", "Таблица с ценами устарела. Чтобы её обновить, вам нужно запустить Client.exe")
-ZO_CreateStringId("TTC_PRICE_PRICETOCHAT", "TTC-цену в чат")
+--Pricing
+-->BAERTRAM, 2018-12-03
+--deleted here and moved to file lang/common.lua at the appropriate language
+--<BAERTRAM, 2018-12-03
 ZO_CreateStringId("TTC_ERROR_ItemLookUpTableMissing", "Отсутствует таблица для поиска предметов. \nДля корректной работы TTC необходимо перед запуском игры запустить Client.exe в папке Documents/Elder Scrolls Online/live/AddOns/TamrielTradeCentre/Client.")
 ZO_CreateStringId("TTC_NPC_SHARGALASH", "шаргалаш")
 ZO_CreateStringId("TTC_NPC_QUELILMOR", "квелилмор")
@@ -254,32 +267,12 @@ ZO_CreateStringId("TTC_NPC_TALWULLAURE", "талвуллори")
 ZO_CreateStringId("TTC_NPC_YGGURZSTRONGBOW", "иггурз тугой лук")
 ZO_CreateStringId("TTC_NPC_UTZAEI", "атцаэй")
 
---> BAERTRAM
---Languages & chat output
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES",         "Языки чата")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_CLIENT",  ">Использовать язык клиента")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_RU",      "русский")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_ZH",      "Китайский")
-
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_DE",      "Немецкий")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_EN",      "английский")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_FR",      "Французский")
----To be localized if NO Russian language patch is used (which translates the SI_* constants to Russian texts as well!)
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_SAY",          GetString(SI_CHANNEL_SWITCH_SAY))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_YELL",         GetString(SI_CHANNEL_SWITCH_YELL))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE",         GetString(SI_CHANNEL_SWITCH_ZONE))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE1",        GetString(SI_CHANNEL_SWITCH_ZONE_ENGLISH))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE2",        GetString(SI_CHANNEL_SWITCH_ZONE_GERMAN))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE3",        GetString(SI_CHANNEL_SWITCH_ZONE_FRENCH))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_ZONE4",        GetString(SI_CHANNEL_SWITCH_ZONE_JAPANESE))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD1",       GetString(SI_CHANNEL_SWITCH_GUILD_1))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD2",       GetString(SI_CHANNEL_SWITCH_GUILD_2))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD3",       GetString(SI_CHANNEL_SWITCH_GUILD_3))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD4",       GetString(SI_CHANNEL_SWITCH_GUILD_4))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_GUILD5",       GetString(SI_CHANNEL_SWITCH_GUILD_5))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_WHISPER_SENT", GetString(SI_CHANNEL_SWITCH_WHISPER))
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGE_PARTY",        GetString(SI_CHANNEL_SWITCH_PARTY))
-
---Load the russian texts for the price to chat
-TamrielTradeCentre.PriceToChatLanguage(TTC_LANG_RU_INDEX)
---< BAERTRAM
+-->BAERTRAM, 2018-12-03
+--TODO: Translation
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATDESCR", "The following languages will be shown in the price to chat language context menu:")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATDE_TOOLTIP", "German")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATEN_TOOLTIP", "English")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATFR_TOOLTIP", "French")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATRU_TOOLTIP", "Russian")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATZH_TOOLTIP", "Chinese")
+--<BAERTRAM, 2018-12-03

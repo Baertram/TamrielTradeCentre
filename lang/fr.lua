@@ -189,6 +189,13 @@ ZO_CreateStringId("TTC_NPC_RAVAMSEDAS", "ravam sedas")
 ZO_CreateStringId("TTC_NPC_SHOGARZ", "shogarz")
 ZO_CreateStringId("TTC_NPC_VALOWENDE", "valowendë")
 ZO_CreateStringId("TTC_NPC_NARDHILBARYS", "nardhil barys")
+ZO_CreateStringId("TTC_NPC_AKIOSHEEJA", "aki-osheeja")
+ZO_CreateStringId("TTC_NPC_FAELEMAR", "faelemar")
+ZO_CreateStringId("TTC_NPC_MAHADALATBERGAMA", "mahadal at-bergama")
+ZO_CreateStringId("TTC_NPC_ORDASHA", "ordasha")
+ZO_CreateStringId("TTC_NPC_THALORIL", "thaloril")
+ZO_CreateStringId("TTC_NPC_XOKOMAR", "xokomar")
+ZO_CreateStringId("TTC_NPC_GIRTA", "gir-ta")
 ZO_CreateStringId("TTC_MASTER_WRIT_ALCHEMYREGEX", "Fabriquez [densu]* (.-) avec")
 ZO_CreateStringId("TTC_MASTER_WRIT_ENCHANTINGREGEX", "Fabriquez [densu]* (.-);")
 ZO_CreateStringId("TTC_MASTER_WRIT_PROVISIONINGREGEX", "Fabriquez [densu]* (.*)")
@@ -208,6 +215,9 @@ ZO_CreateStringId("TTC_SETTING_INCLUDEAGGREGATE", "Inclure mini/moyen/maxi")
 ZO_CreateStringId("TTC_SETTING_INCLUDEENTRYCOUNT", "Inclure nombre d'entrées")
 ZO_CreateStringId("TTC_SETTING_INCLUDELASTUPDATETIME", "Inclure heure dernière mise à jour")
 ZO_CreateStringId("TTC_SETTING_PRICETOCHATSETTINGS", "Paramètres - Dialogue infos de prix")
+-->BAERTRAM, 2018-12-03
+ZO_CreateStringId("TTC_SETTING_PRICETOCHATSETTINGS_SUBMENU", "Dialogue infos de prix - Context menu")
+--<BAERTRAM, 2018-12-03
 ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATBUTTON", "Activer - Dialogue infos de prix")
 ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATBUTTON_TOOLTIP", "Clic droit - Menu des liens d'objets")
 ZO_CreateStringId("TTC_SETTING_CLEARDATA", "Supprimer les données")
@@ -238,7 +248,10 @@ ZO_CreateStringId("TTC_MSG_THANKSFORUSINGTTC", "Merci pour l'utilisation de Tamr
 ZO_CreateStringId("TTC_MSG_FIRSTLOADINFO", "-Veuillez notez que cet addon |c993300requiert le programme Client associé|r pour fonctionner.\n-Le Client chargera vos listes de résultats et conservera à jour l'addon et les prix.\n-À la première utilisation seulement, |c339999SVP ouvrez une boutique de guilde et attendez que l'addon analyse les offres existantes.|r\n-Pour plus d'information, visitez http://tamrieltradecentre.com/help/AddonAndClient")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEMISSING", "Table de prix manquante")
 ZO_CreateStringId("TTC_ERROR_PRICETABLEOUTDATED", "Table de prix obsolète, veuillez effectuer une mise à jour en exécutant Client.exe")
-ZO_CreateStringId("TTC_PRICE_PRICETOCHAT", "Prix vers la fenêtre Dialogue")
+--Pricing
+-->BAERTRAM, 2018-12-03
+--deleted here and moved to file lang/common.lua at the appropriate language
+--<BAERTRAM, 2018-12-03
 ZO_CreateStringId("TTC_ERROR_ItemLookUpTableMissing", "La table de consultation des objets est manquante. \nVous devez exécuter Client.exe  dans Mes Documents/Elder Scrolls Online/live/AddOns/TamrielTradeCentre/Client avant de commencer le jeu pour que TTC fonctionne correctement.")
 ZO_CreateStringId("TTC_NPC_SHARGALASH", "shargalash")
 ZO_CreateStringId("TTC_NPC_QUELILMOR", "quelilmor")
@@ -254,13 +267,11 @@ ZO_CreateStringId("TTC_NPC_TALWULLAURE", "talwullaurë")
 ZO_CreateStringId("TTC_NPC_YGGURZSTRONGBOW", "yggurz fortarc")
 ZO_CreateStringId("TTC_NPC_UTZAEI", "utzaei")
 
---> BAERTRAM
---Languages & chat output
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES",         "Langues de dialogue")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_CLIENT",  ">Utiliser la langue du client")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_RU",      "Russe")
-ZO_CreateStringId("TTC_SETTING_CHAT_LANGUAGES_ZH",      "Chinois")
-
---Load the french texts for the price to chat
-TamrielTradeCentre.PriceToChatLanguage(TTC_LANG_FR_INDEX)
---< BAERTRAM
+-->BAERTRAM, 2018-12-03
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATDESCR", "Les langues suivantes sont affichées dans le menu contextuel Price vers la fenêtre Dialogue:")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATDE_TOOLTIP", "Allemand")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATEN_TOOLTIP", "Anglais")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATFR_TOOLTIP", "Français")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATRU_TOOLTIP", "Russe")
+ZO_CreateStringId("TTC_SETTING_ENABLEPRICETOCHATZH_TOOLTIP", "Chinois")
+--<BAERTRAM, 2018-12-03

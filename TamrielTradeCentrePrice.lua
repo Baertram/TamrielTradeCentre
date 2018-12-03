@@ -150,30 +150,14 @@ function TamrielTradeCentrePrice:AppendPriceInfo(toolTipControl, itemLink)
 	end
 end
 
-function TamrielTradeCentrePrice:PriceInfoToChat(itemLink)
-	-->BAERTRAM
-	local chatChannel
-	local changeLanguageBecauseOfChatChannel = false
-	--Get the currently used chat channel at the active chat tab
-	if CHAT_SYSTEM and CHAT_SYSTEM.currentChannel then chatChannel = CHAT_SYSTEM.currentChannel end
-	--Check if the chat channel is given and supported
-	if chatChannel ~= nil then
-		local supportedChatChannels = TamrielTradeCentre.supportedChatChannels
-		--Is the current chat channel suppported?
-		local isChatChannelSupported = supportedChatChannels[chatChannel] or false
-		if isChatChannelSupported then
-			--Get the wished chat language for the channel
-			local wishedChatChannelLang = _settings.chatLanguage[chatChannel]
-			--Is the current client language <> the wished chat output language for the currently active chat channel?
-			changeLanguageBecauseOfChatChannel = wishedChatChannelLang ~= nil and wishedChatChannelLang ~= TTC_LANG_CLIENT_INDEX
-			if changeLanguageBecauseOfChatChannel then
-				--Change the needed localization variables to the wished chat channel output language
-				-->Function is defined in files /lang/common.lua
-				TamrielTradeCentre.PriceToChatLanguage(wishedChatChannelLang)
-			end
-		end
+function TamrielTradeCentrePrice:PriceInfoToChat(itemLink, languageIndex) -->BAERTRAM, 2018-12-03 2nd parameter "languageIndex" --<BAERTRAM, 2018-12-03
+-->BAERTRAM, 2018-12-03
+	--Change the language strings before chat output, and later on change them back to the client language
+	languageIndex = languageIndex or TTC_LANG_CLIENT_INDEX
+	if languageIndex ~= TTC_LANG_CLIENT_INDEX then
+		TamrielTradeCentre.PriceToChatLanguage(languageIndex)
 	end
-	--<BAERTRAM
+--<BAERTRAM, 2018-12-03
 
 	local priceInfo = self:GetPriceInfo(itemLink)
 	local priceString = string.format(GetString(TTC_PRICE_FORX), itemLink)
@@ -206,16 +190,61 @@ function TamrielTradeCentrePrice:PriceInfoToChat(itemLink)
 	if (_settings.EnablePriceToChatLastUpdate) then
 		priceString = priceString .. " " .. self:GetPriceTableUpdatedDateString()
 	end
-
 	CHAT_SYSTEM.textEntry.editControl:InsertText(priceString)
 
-	--Change the price to chat texts back to the original language of your client so the tooltips look fine for you again
-	if changeLanguageBecauseOfChatChannel then
-		--Change the ölanguage back to the client's language now
-		-->Function is defined in files /lang/common.lua
+-->BAERTRAM, 2018-12-03
+	--Change the language strings back to the client language
+	if languageIndex ~= TTC_LANG_CLIENT_INDEX then
 		TamrielTradeCentre.PriceToChatLanguage(TTC_LANG_CLIENT_INDEX)
 	end
+--<BAERTRAM, 2018-12-03
 end
+
+-->BAERTRAM, 2018-12-03
+local function addPriceToChatContextMenuEntries(itemLink, ctmParentCtrl)
+	--Addon FCOItemSaver bugfix: Do not show the context menu entries if SHIFT+right click was used on an inventory row
+	if FCOIS and FCOIS.preventerVars and FCOIS.preventerVars.dontShowInvContextMenu == true then return end
+	--Using library LibCustomMenu to add a context menu, containing a submenu if more than 1 price to
+	--chat language was enabled in the LAM settings.
+	--> See file SettingsMenu.lua, function updatePriceToChatContextMenu()
+	local priceToChatLangCtm = TamrielTradeCentre.priceToChatLangCtm
+	if priceToChatLangCtm and #priceToChatLangCtm > 0 then
+		--Call a bit later so the standard Inventory context menu was created already, and new
+		--context menu items get added afterwards
+		zo_callLater(function()
+			local customMenuSubEntries = {}
+			local useSubMenu = #priceToChatLangCtm > 1 or false
+			if not useSubMenu then customMenuSubEntries = nil end
+			--For each selected language from the LAM settings create a menu entry, or a submenu entry if there are more
+			--than 1 languages enabled
+			for _, languageIndex in ipairs(priceToChatLangCtm) do
+				--Change t he language files for price 2 chat to the selected languageIndex
+				TamrielTradeCentre.PriceToChatLanguage(languageIndex)
+				local function contextMenuEntryOnClickedFunc(p_link, p_languageIndex)
+					TamrielTradeCentrePrice:PriceInfoToChat(p_link, p_languageIndex)
+				end
+				if useSubMenu then
+					local newSubEntry = {
+						label = GetString(TTC_PRICE_PRICETOCHAT),
+						callback = function() contextMenuEntryOnClickedFunc(itemLink, languageIndex) end,
+					}
+					table.insert(customMenuSubEntries, newSubEntry)
+				else
+					AddCustomMenuItem(GetString(TTC_PRICE_PRICETOCHAT), function() contextMenuEntryOnClickedFunc(itemLink, languageIndex) end, MENU_ADD_OPTION_LABEL)
+				end
+			end
+			--Reset the language files again to the client language
+			TamrielTradeCentre.PriceToChatLanguage(TTC_LANG_CLIENT_INDEX)
+			--Add the submenu to the context menu now
+			if customMenuSubEntries ~= nil and #customMenuSubEntries > 0 then
+				AddCustomSubMenuItem(GetString(TTC_PRICE_PRICETOCHAT), customMenuSubEntries)
+			end
+			--Show the added context menu entries now
+			ShowMenu(ctmParentCtrl)
+		end, 30)
+	end
+end
+--<BAERTRAM, 2018-12-03
 
 local function OverWriteLinkMouseUpHandler()
 	local base = ZO_LinkHandler_OnLinkMouseUp
@@ -227,8 +256,11 @@ local function OverWriteLinkMouseUpHandler()
 				return
 			end
 
-			AddMenuItem(GetString(TTC_PRICE_PRICETOCHAT), function() TamrielTradeCentrePrice:PriceInfoToChat(link) end)
-			ShowMenu(control)
+			-->BAERTRAM, 2018-12-03
+			--AddMenuItem(GetString(TTC_PRICE_PRICETOCHAT), function() TamrielTradeCentrePrice:PriceInfoToChat(link) end)
+			--ShowMenu(control)
+			addPriceToChatContextMenuEntries(link, control)
+			--<BAERTRAM, 2018-12-03
 		end
 	end
 end
@@ -252,11 +284,16 @@ local function OverWriteInventoryShowContextMenuHandler()
 					link = GetTradingHouseListingItemLink(ZO_Inventory_GetSlotIndex(inventorySlot))
 				end
 				if link ~= nil and TamrielTradeCentre:IsItemLink(link) then
+					--[[
 					zo_callLater(
 						function() 
 							AddMenuItem(GetString(TTC_PRICE_PRICETOCHAT), function() TamrielTradeCentrePrice:PriceInfoToChat(link) end)
 							ShowMenu(self)
 						end, 50)
+					]]
+-->BAERTRAM, 2018-12-03
+					addPriceToChatContextMenuEntries(link, inventorySlot)
+--<BAERTRAM, 2018-12-03
 				end
 			end
 		end
